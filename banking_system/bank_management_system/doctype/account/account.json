@@ -1,0 +1,212 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:ACC-{ben_name}-{#######}",
+ "creation": "2026-02-10 11:06:40.109580",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_viqq",
+  "amended_from",
+  "ben_name",
+  "father_name",
+  "full_name",
+  "dob",
+  "address",
+  "paid_loan_amount",
+  "remaining_loan_amount",
+  "column_break_zueg",
+  "pan_number",
+  "aadhaar_number",
+  "account_type",
+  "phone_number",
+  "email",
+  "age",
+  "work_details_section",
+  "monthly_income",
+  "salary_type",
+  "column_break_bmnt",
+  "salary_credited_date",
+  "work_stabilityin_years",
+  "credit_score"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_viqq",
+   "fieldtype": "Section Break",
+   "label": "Personal Information"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Account",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "ben_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Beneficiary Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "father_name",
+   "fieldtype": "Data",
+   "label": "Father Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "address",
+   "fieldtype": "Small Text",
+   "label": "Address",
+   "reqd": 1
+  },
+  {
+   "fieldname": "pan_number",
+   "fieldtype": "Data",
+   "label": "PAN Number ",
+   "reqd": 1
+  },
+  {
+   "fieldname": "aadhaar_number",
+   "fieldtype": "Data",
+   "label": "Aadhaar Number",
+   "reqd": 1
+  },
+  {
+   "fieldname": "account_type",
+   "fieldtype": "Select",
+   "label": "Account Type",
+   "options": "Saving\nCurrent\nLoan Account",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_zueg",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "phone_number",
+   "fieldtype": "Data",
+   "label": "Phone Number",
+   "reqd": 1
+  },
+  {
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "label": "E-mail",
+   "reqd": 1
+  },
+  {
+   "fieldname": "full_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Full Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "credit_score",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Credit Score",
+   "read_only": 1
+  },
+  {
+   "fieldname": "dob",
+   "fieldtype": "Date",
+   "label": "Date of Birth",
+   "reqd": 1
+  },
+  {
+   "fieldname": "salary_credited_date",
+   "fieldtype": "Date",
+   "label": "Salary Credited Date ",
+   "reqd": 1
+  },
+  {
+   "fieldname": "monthly_income",
+   "fieldtype": "Currency",
+   "label": "Monthly Income ",
+   "non_negative": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "work_details_section",
+   "fieldtype": "Section Break",
+   "label": "Work Details "
+  },
+  {
+   "fieldname": "salary_type",
+   "fieldtype": "Select",
+   "label": "Salary Type",
+   "options": "Fixed\nCommission Based\nPerformance Based\nContract Based",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_bmnt",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "age",
+   "fieldtype": "Int",
+   "label": "Age",
+   "non_negative": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "work_stabilityin_years",
+   "fieldtype": "Int",
+   "label": "Work stability(in years)",
+   "non_negative": 1,
+   "reqd": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "default": "0",
+   "fieldname": "remaining_loan_amount",
+   "fieldtype": "Currency",
+   "label": "Remaining Loan Amount"
+  },
+  {
+   "allow_on_submit": 1,
+   "default": "0",
+   "fieldname": "paid_loan_amount",
+   "fieldtype": "Currency",
+   "label": "Paid Loan Amount"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2026-02-10 17:18:11.925518",
+ "modified_by": "Administrator",
+ "module": "Bank Management System",
+ "name": "Account",
+ "naming_rule": "Expression (old style)",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

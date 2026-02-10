@@ -1,0 +1,51 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-02-10 13:01:10.611014",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "document_type",
+  "file_attach",
+  "describe_the_document"
+ ],
+ "fields": [
+  {
+   "fieldname": "document_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Document Type",
+   "options": "Agreement\nLand Document\nVehicle Document\nGold",
+   "reqd": 1
+  },
+  {
+   "fieldname": "file_attach",
+   "fieldtype": "Attach",
+   "in_list_view": 1,
+   "label": "File Attach ",
+   "reqd": 1
+  },
+  {
+   "fieldname": "describe_the_document",
+   "fieldtype": "Small Text",
+   "label": "Describe the Document",
+   "reqd": 1
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2026-02-10 13:12:54.926131",
+ "modified_by": "Administrator",
+ "module": "Bank Management System",
+ "name": "Document",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

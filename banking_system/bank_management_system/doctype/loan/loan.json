@@ -1,0 +1,225 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:LT-{applicant_name}-{loan_type}-{##}",
+ "creation": "2026-02-10 12:14:48.384435",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_topy",
+  "amended_from",
+  "applicant_acc_no",
+  "applicant_name",
+  "column_break_skna",
+  "phone_number",
+  "credit_score",
+  "loan_information_section",
+  "req_amount",
+  "month",
+  "application_date",
+  "loan_type",
+  "paid_amount",
+  "monthly_pay",
+  "column_break_vljz",
+  "assigned_ofiicer",
+  "assigned_officer_destination",
+  "loan_status",
+  "remark",
+  "remaining_amount",
+  "monthly_interest",
+  "document_information_section",
+  "document",
+  "payment_link_section",
+  "payment_tab"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_topy",
+   "fieldtype": "Section Break",
+   "label": "Applicant Information"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Loan",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "applicant_acc_no",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Applicant Acc No ",
+   "options": "Account",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "applicant_acc_no.full_name",
+   "fieldname": "applicant_name",
+   "fieldtype": "Data",
+   "label": "Applicant Name "
+  },
+  {
+   "fetch_from": "applicant_acc_no.phone_number",
+   "fieldname": "phone_number",
+   "fieldtype": "Data",
+   "label": "Phone Number "
+  },
+  {
+   "fieldname": "loan_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Purpose of Loan ",
+   "options": "House Loan\nBusiness Loan\nVehicle Loan\nGold Loan\nLoan Against Property\nPersonal Loan\nEducation Loan",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "applicant_acc_no.credit_score",
+   "fieldname": "credit_score",
+   "fieldtype": "Int",
+   "label": "Credit Score"
+  },
+  {
+   "fieldname": "column_break_skna",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "loan_information_section",
+   "fieldtype": "Section Break",
+   "label": "Loan Information"
+  },
+  {
+   "fieldname": "application_date",
+   "fieldtype": "Date",
+   "label": "Application Date",
+   "reqd": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "loan_status",
+   "fieldtype": "Select",
+   "label": "Loan Status",
+   "options": "Submitted\nVerified\nApproved\nRejected",
+   "reqd": 1
+  },
+  {
+   "depends_on": "eval:doc.loan_status==\"Rejected\"\n",
+   "fieldname": "remark",
+   "fieldtype": "Data",
+   "label": "Remark"
+  },
+  {
+   "fieldname": "column_break_vljz",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "assigned_ofiicer",
+   "fieldtype": "Link",
+   "label": "Assigned Ofiicer",
+   "options": "Staff",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "assigned_ofiicer.destination",
+   "fieldname": "assigned_officer_destination",
+   "fieldtype": "Data",
+   "label": "Assigned Officer Destination"
+  },
+  {
+   "fieldname": "document_information_section",
+   "fieldtype": "Section Break",
+   "label": "Document Information"
+  },
+  {
+   "fieldname": "document",
+   "fieldtype": "Table",
+   "label": "Document",
+   "options": "Document"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "paid_amount",
+   "fieldtype": "Currency",
+   "label": "Paid Amount"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "remaining_amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Remaining Amount "
+  },
+  {
+   "fieldname": "payment_link_section",
+   "fieldtype": "Section Break",
+   "label": "Payment Link"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "monthly_pay",
+   "fieldtype": "Currency",
+   "label": "Monthly Pay ",
+   "non_negative": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "req_amount",
+   "fieldtype": "Currency",
+   "label": "Requested Amount ",
+   "non_negative": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "month",
+   "fieldtype": "Int",
+   "label": "Tenure (in years)",
+   "reqd": 1
+  },
+  {
+   "fieldname": "monthly_interest",
+   "fieldtype": "Currency",
+   "label": "Monthly Interest",
+   "read_only": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "payment_tab",
+   "fieldtype": "Table",
+   "label": "Loan Payment Link ",
+   "options": "Loan Link"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2026-02-10 17:24:53.754502",
+ "modified_by": "Administrator",
+ "module": "Bank Management System",
+ "name": "Loan",
+ "naming_rule": "Expression (old style)",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

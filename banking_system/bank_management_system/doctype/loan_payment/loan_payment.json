@@ -1,0 +1,140 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:LP-{name1}-{##}",
+ "creation": "2026-02-10 13:17:42.843250",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_fuzd",
+  "amended_from",
+  "loan_id",
+  "name1",
+  "loan_amount",
+  "date_of_payment",
+  "paid_amount",
+  "column_break_bjqy",
+  "remaining_amount",
+  "loan_type",
+  "monthly_pay",
+  "monthly_interest",
+  "amount"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_fuzd",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Loan Payment",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "loan_id",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Loan ID",
+   "options": "Loan",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "loan_id.req_amount",
+   "fieldname": "loan_amount",
+   "fieldtype": "Data",
+   "label": "Loan Amount"
+  },
+  {
+   "fetch_from": "loan_id.remaining_amount",
+   "fieldname": "remaining_amount",
+   "fieldtype": "Currency",
+   "label": "Remaining amount ",
+   "read_only": 1
+  },
+  {
+   "fieldname": "amount",
+   "fieldtype": "Currency",
+   "label": "Amount ",
+   "non_negative": 1,
+   "reqd": 1
+  },
+  {
+   "fetch_from": "loan_id.applicant_name",
+   "fieldname": "name1",
+   "fieldtype": "Data",
+   "label": "Name "
+  },
+  {
+   "fieldname": "column_break_bjqy",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "loan_id.loan_type",
+   "fieldname": "loan_type",
+   "fieldtype": "Data",
+   "label": "Loan Type"
+  },
+  {
+   "fetch_from": "loan_id.monthly_pay",
+   "fieldname": "monthly_pay",
+   "fieldtype": "Currency",
+   "label": "Monthly Pay"
+  },
+  {
+   "fetch_from": "loan_id.monthly_interest",
+   "fieldname": "monthly_interest",
+   "fieldtype": "Currency",
+   "label": "Monthly Interest"
+  },
+  {
+   "default": "now",
+   "fieldname": "date_of_payment",
+   "fieldtype": "Date",
+   "label": "Date of payment",
+   "reqd": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "fetch_from": "loan_id.paid_amount",
+   "fieldname": "paid_amount",
+   "fieldtype": "Currency",
+   "label": "Paid Amount",
+   "read_only": 1
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2026-02-10 17:44:59.511096",
+ "modified_by": "Administrator",
+ "module": "Bank Management System",
+ "name": "Loan Payment",
+ "naming_rule": "Expression (old style)",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
