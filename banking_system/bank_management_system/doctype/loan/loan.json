@@ -10,9 +10,10 @@
   "amended_from",
   "applicant_acc_no",
   "applicant_name",
+  "credit_score",
   "column_break_skna",
   "phone_number",
-  "credit_score",
+  "email",
   "loan_information_section",
   "req_amount",
   "month",
@@ -20,6 +21,7 @@
   "loan_type",
   "paid_amount",
   "monthly_pay",
+  "next_interest_amount",
   "column_break_vljz",
   "assigned_ofiicer",
   "assigned_officer_destination",
@@ -27,6 +29,7 @@
   "remark",
   "remaining_amount",
   "monthly_interest",
+  "payment_id",
   "document_information_section",
   "document",
   "payment_link_section",
@@ -106,6 +109,7 @@
    "reqd": 1
   },
   {
+   "allow_on_submit": 1,
    "depends_on": "eval:doc.loan_status==\"Rejected\"\n",
    "fieldname": "remark",
    "fieldtype": "Data",
@@ -118,7 +122,7 @@
   {
    "fieldname": "assigned_ofiicer",
    "fieldtype": "Link",
-   "label": "Assigned Ofiicer",
+   "label": "Assigned Ofiicer Destination",
    "options": "Staff",
    "reqd": 1
   },
@@ -126,7 +130,7 @@
    "fetch_from": "assigned_ofiicer.destination",
    "fieldname": "assigned_officer_destination",
    "fieldtype": "Data",
-   "label": "Assigned Officer Destination"
+   "label": "Assigned Officer"
   },
   {
    "fieldname": "document_information_section",
@@ -143,14 +147,16 @@
    "allow_on_submit": 1,
    "fieldname": "paid_amount",
    "fieldtype": "Currency",
-   "label": "Paid Amount"
+   "label": "Paid Amount",
+   "read_only": 1
   },
   {
    "allow_on_submit": 1,
    "fieldname": "remaining_amount",
    "fieldtype": "Currency",
    "in_list_view": 1,
-   "label": "Remaining Amount "
+   "label": "Remaining Amount ",
+   "read_only": 1
   },
   {
    "fieldname": "payment_link_section",
@@ -180,8 +186,8 @@
   },
   {
    "fieldname": "monthly_interest",
-   "fieldtype": "Currency",
-   "label": "Monthly Interest",
+   "fieldtype": "Int",
+   "label": "Interest Percentage (%)",
    "read_only": 1
   },
   {
@@ -190,13 +196,35 @@
    "fieldtype": "Table",
    "label": "Loan Payment Link ",
    "options": "Loan Link"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "payment_id",
+   "fieldtype": "Data",
+   "label": "Payment ID",
+   "read_only": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "next_interest_amount",
+   "fieldtype": "Currency",
+   "label": "Next Interest Amount",
+   "non_negative": 1,
+   "read_only": 1
+  },
+  {
+   "fetch_from": "applicant_acc_no.email",
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "label": "Email",
+   "read_only": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-02-10 17:24:53.754502",
+ "modified": "2026-02-12 15:36:41.733227",
  "modified_by": "Administrator",
  "module": "Bank Management System",
  "name": "Loan",
@@ -204,6 +232,7 @@
  "owner": "Administrator",
  "permissions": [
   {
+   "cancel": 1,
    "create": 1,
    "delete": 1,
    "email": 1,
@@ -212,6 +241,19 @@
    "read": 1,
    "report": 1,
    "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "cancel": 1,
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Loan Officer",
    "share": 1,
    "submit": 1,
    "write": 1

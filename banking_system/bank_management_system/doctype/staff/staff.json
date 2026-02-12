@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "field:name1",
+ "autoname": "format:{destination}-{##}",
  "creation": "2026-02-10 12:48:04.526553",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -42,11 +42,11 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-02-10 12:55:15.394883",
+ "modified": "2026-02-12 15:10:43.992520",
  "modified_by": "Administrator",
  "module": "Bank Management System",
  "name": "Staff",
- "naming_rule": "By fieldname",
+ "naming_rule": "Expression (old style)",
  "owner": "Administrator",
  "permissions": [
   {

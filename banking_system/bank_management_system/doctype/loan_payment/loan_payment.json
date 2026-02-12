@@ -10,14 +10,17 @@
   "amended_from",
   "loan_id",
   "name1",
-  "loan_amount",
-  "date_of_payment",
-  "paid_amount",
-  "column_break_bjqy",
-  "remaining_amount",
+  "email",
   "loan_type",
-  "monthly_pay",
+  "date_of_payment",
+  "penalty_amount",
+  "column_break_bjqy",
+  "loan_amount",
+  "paid_amount",
+  "remaining_amount",
   "monthly_interest",
+  "monthly_pay",
+  "rate_of_interest",
   "amount"
  ],
  "fields": [
@@ -46,8 +49,10 @@
   {
    "fetch_from": "loan_id.req_amount",
    "fieldname": "loan_amount",
-   "fieldtype": "Data",
-   "label": "Loan Amount"
+   "fieldtype": "Currency",
+   "label": "Loan Amount",
+   "non_negative": 1,
+   "read_only": 1
   },
   {
    "fetch_from": "loan_id.remaining_amount",
@@ -83,13 +88,18 @@
    "fetch_from": "loan_id.monthly_pay",
    "fieldname": "monthly_pay",
    "fieldtype": "Currency",
-   "label": "Monthly Pay"
+   "label": "Monthly Pay",
+   "non_negative": 1,
+   "read_only": 1
   },
   {
-   "fetch_from": "loan_id.monthly_interest",
+   "allow_on_submit": 1,
+   "fetch_from": "loan_id.next_interest_amount",
    "fieldname": "monthly_interest",
    "fieldtype": "Currency",
-   "label": "Monthly Interest"
+   "label": "Monthly Interest Amount",
+   "non_negative": 1,
+   "read_only": 1
   },
   {
    "default": "now",
@@ -105,13 +115,35 @@
    "fieldtype": "Currency",
    "label": "Paid Amount",
    "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "penalty_amount",
+   "fieldtype": "Currency",
+   "label": "Penalty Amount",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "loan_id.monthly_interest",
+   "fieldname": "rate_of_interest",
+   "fieldtype": "Int",
+   "hidden": 1,
+   "label": "Rate of Interest ",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "loan_id.email",
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "label": "E-mail",
+   "options": "Email"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-02-10 17:44:59.511096",
+ "modified": "2026-02-12 13:27:51.516882",
  "modified_by": "Administrator",
  "module": "Bank Management System",
  "name": "Loan Payment",
@@ -119,6 +151,7 @@
  "owner": "Administrator",
  "permissions": [
   {
+   "cancel": 1,
    "create": 1,
    "delete": 1,
    "email": 1,

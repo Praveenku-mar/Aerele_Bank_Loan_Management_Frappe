@@ -2,6 +2,7 @@
 # For license information, please see license.txt
 
 import frappe
+import re
 from frappe.model.document import Document 
 
 
@@ -40,6 +41,32 @@ class Account(Document):
 		self.set_full_name()
 		self.validate_aadhaar_number()
 		self.calculate_credit_score()
+		self.validate_pan_number()
+
+
+	
+
+	def validate_pan_number(self):
+		pan_no = self.pan_number.strip().upper()
+		name = self.ben_name.strip().upper()
+
+		pattern = r'^[A-Z]{5}[0-9]{4}[A-Z]$'
+		valid_types = ['A','B','C','F','G','H','L','J','P','T']
+
+		if len(pan_no) != 10:
+			frappe.throw( "Invalid PAN Number")
+
+		if not pan_no[3] in  valid_types:
+			frappe.throw("Invalid PAN Holder type") 
+
+		if not re.match(pattern, pan_no):
+			frappe.throw( "Invalid PAN format")
+
+		if pan_no[4] != name[0]:
+			frappe.throw ( "5th character must match first letter of your name")
+
+		return True
+
 	
 	def calculate_credit_score(self):
 		monthly_income = self.monthly_income

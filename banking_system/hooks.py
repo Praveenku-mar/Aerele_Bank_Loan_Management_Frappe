@@ -148,23 +148,23 @@ app_license = "mit"
 # Scheduled Tasks
 # ---------------
 
-# scheduler_events = {
-# 	"all": [
-# 		"banking_system.tasks.all"
-# 	],
-# 	"daily": [
-# 		"banking_system.tasks.daily"
-# 	],
-# 	"hourly": [
-# 		"banking_system.tasks.hourly"
-# 	],
-# 	"weekly": [
-# 		"banking_system.tasks.weekly"
-# 	],
-# 	"monthly": [
-# 		"banking_system.tasks.monthly"
-# 	],
-# }
+scheduler_events = {
+	# "all": [
+	# 	"banking_system.tasks.all"
+	# ],
+	# "daily": [
+	# 	"banking_system.tasks.daily"
+	# ],
+	# "hourly": [
+	# 	"banking_system.tasks.hourly"
+	# ],
+	# "weekly": [
+	# 	"banking_system.tasks.weekly"
+	# ],
+	"monthly": [
+		"banking_system.task.monthly.send_due_reminder_email"
+	],
+}
 
 # Testing
 # -------
