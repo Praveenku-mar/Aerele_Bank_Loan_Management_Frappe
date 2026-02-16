@@ -30,6 +30,7 @@
   "remaining_amount",
   "monthly_interest",
   "payment_id",
+  "next_loan_due_date",
   "document_information_section",
   "document",
   "payment_link_section",
@@ -218,13 +219,19 @@
    "fieldtype": "Data",
    "label": "Email",
    "read_only": 1
+  },
+  {
+   "fieldname": "next_loan_due_date",
+   "fieldtype": "Date",
+   "label": "Next Loan Due Date",
+   "read_only": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-02-12 15:36:41.733227",
+ "modified": "2026-02-16 11:58:15.125792",
  "modified_by": "Administrator",
  "module": "Bank Management System",
  "name": "Loan",

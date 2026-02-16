@@ -161,9 +161,11 @@ scheduler_events = {
 	# "weekly": [
 	# 	"banking_system.tasks.weekly"
 	# ],
-	"monthly": [
+	"cron": {
+        "0 9 4 * *": [
 		"banking_system.task.monthly.send_due_reminder_email"
-	],
+	 ]
+    }
 }
 
 # Testing

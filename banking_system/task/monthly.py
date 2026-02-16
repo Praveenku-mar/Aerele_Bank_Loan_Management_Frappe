@@ -58,7 +58,7 @@ def send_due_reminder_email():
                             </tr>
                             <tr>
                                 <td style="color:#555;"><strong>Monthly EMI</strong></td>
-                                <td style="font-size:18px; color:#1f4e79;"><strong>₹ {{ row.monthly_pay }}</strong></td>
+                                <td style="font-size:18px; color:#1f4e79;"><strong>₹ {{ row.monthly_pay | round(2)}}</strong></td>
                             </tr>
                         </table>
         

@@ -4,6 +4,7 @@
 import frappe
 import math
 from frappe.model.document import Document
+from frappe.utils.pdf import get_pdf
 
 
 class Loan(Document):
@@ -68,97 +69,92 @@ class Loan(Document):
 
 		self.payment_id = payment.name
 
-def send_due_reminder_email():
-	loan = frappe.get_all("Loan",
-		filters={
-			"loan_status":"Approved"
-		},
-		fields=['name','applicant_name','applicant_acc_no','req_amount','loan_type','monthly_pay','email']
-	)
-	
-	for row in loan:
-		html = """ <!DOCTYPE html>
 
-			<html>
-			<head>
-			    <meta charset="UTF-8">
-			    <title>Loan Due Reminder</title>
-			</head>
-			<body style="font-family: Arial, sans-serif; background-color: #f4f6f8; margin: 0; padding: 20px;">
+@frappe.whitelist()
+def history_email(name):
+	doc = frappe.get_doc("Loan", name)
+	message = """
+		<html>
+		<body style="margin:0; padding:0; font-family: Arial, sans-serif; background-color:#f4f6f9;">
 
-			```
-			<table width="100%" cellpadding="0" cellspacing="0">
-			    <tr>
-			        <td align="center">
-			            <table width="600" cellpadding="20" cellspacing="0" style="background-color: #ffffff; border-radius: 8px;">
+			<div style="max-width:800px; margin:30px auto; background:#ffffff; border-radius:10px; box-shadow:0 4px 12px rgba(0,0,0,0.1); overflow:hidden;">
 
-			                <tr>
-			                    <td align="center" style="background-color: #1f4e79; color: #ffffff; border-radius: 8px 8px 0 0;">
-			                        <h2 style="margin: 0;">Loan EMI Reminder</h2>
-			                    </td>
-			                </tr>
+				<!-- Header -->
+				<div style="background:linear-gradient(90deg,#1e3c72,#2a5298); color:white; padding:20px;">
+					<h2 style="margin:0;">Loan Repayment History</h2>
+				</div>
 
-			                <tr>
-			                    <td>
-			                        <p>Dear <strong>{{loan.applicant_name}}</strong>,</p>
+				<!-- Loan Details -->
+				<div style="padding:20px;">
+					<p style="margin:5px 0;"><strong>Loan ID:</strong> {{ doc.name }}</p>
+					<p style="margin:5px 0;"><strong>Account Holder:</strong> {{ doc.applicant_name }}</p>
+					<p style="margin:5px 0;"><strong>Email:</strong> {{ doc.email }}</p>
+				</div>
 
-			                        <p>This is a reminder that your loan EMI payment is due.</p>
+				<!-- Table -->
+				<div style="padding:20px;">
+					<table width="100%" cellpadding="10" cellspacing="0" style="border-collapse:collapse;">
+						<thead>
+							<tr style="background-color:#2a5298; color:white; text-align:left;">
+								<th>Serial No</th>
+								<th>Payment ID</th>
+								<th>Date</th>
+								<th>Amount Paid</th>
+								<th>Balance</th>
+								<th>Interest</th>
+								<th>Penalty</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for row in doc.payment_tab %}
+							<tr style="border-bottom:1px solid #ddd;">
+								<td>{{ loop.index }}</td>
+								<td>{{ row.payment_link }}</td>
+								<td>{{ row.payment_data }}</td>
+								<td style="color:green; font-weight:bold;">₹ {{ row.amount_paid }}</td>
+								<td style="color:#d9534f;">₹ {{ row.remaining_amount | round(2)}}</td>
+								<td>₹ {{ row.interest | round(2)}}</td>
+								<td style="color:#ff9800;">₹ {{ row.penalty }}</td>
+							</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+					<p style="font-size:14px; color:#555; "margin:5px 0;">
+                            Need help? Contact us:<br>
+                            📧 praveensekar223@gmail.com<br>
+                            📞 9092837965
+                        </p>
+        
+                        <p style="margin-bottom:0; "margin:5px 0;">
+                            Regards,<br>
+                            <strong>PK Bank of India, Tharamanagalam</strong>
+                        </p>
 
-			                        <hr>
+				<!-- Footer -->
+				<div style="background:#f1f1f1; padding:15px; text-align:center; font-size:12px; color:#777;">
+					This is an automated loan repayment report. Please do not reply to this email.
+				</div>
 
-			                        <h3 style="margin-bottom: 10px;">Loan Details</h3>
-			                        <p>
-			                            <strong>Loan ID:</strong> {{loan.name}}<br>
-										<strong>Account No :</strong>{{loan.applicant_acc_no}}
-			                            <strong>Loan Type:</strong> {{loan.loan_type}}<br>
-			                            <strong>EMI Amount:</strong> ₹{{loan.monthly_pay}}<br>
-			                        </p>
+			</div>
 
-			                        <hr>
-
-			                        <p>
-			                            Kindly ensure that the payment is made on or before the due date 
-			                            to avoid late payment charges or penalties.
-			                        </p>
-
-			                        <p>
-			                            If you have already made the payment, please ignore this message.
-			                        </p>
-
-			                        <p>
-			                            For any assistance, contact us at:<br>
-			                            <strong>Email:</strong>praveensekar223@gmail.com<br>
-			                            <strong>Phone:</strong> 9092837965
-			                        </p>
-
-			                        <br>
-
-			                        <p>Regards,<br>
-			                        <strong>PK Bank of India, Tharamanagalam</strong></p>
-			                    </td>
-			                </tr>
-
-			                <tr>
-			                    <td align="center" style="background-color: #f0f0f0; font-size: 12px; color: #777; border-radius: 0 0 8px 8px;">
-			                        This is an automated message. Please do not reply directly to this email.
-			                    </td>
-			                </tr>
-
-			            </table>
-			        </td>
-			    </tr>
-			</table>
-			```
-
-			</body>
-			</html>
-
-		
+		</body>
+		</html>
 		"""
 
-		frappe.sendmail(recipients=loan.email,subject="Loan Repayment Reminder",message=html,now=True)
+	rendered_message = frappe.render_template(message, {"doc": doc})
+	pdf = get_pdf(rendered_message)
 
-
+	frappe.sendmail(
+		recipients=[doc.email],
+		subject=f"Loan repayment history {doc.name}",
+		message=f"{rendered_message} \n Please find the attached loan repayment history.",
+		attachments=[{
+            "fname": "Loan Invoice.pdf",
+            "fcontent": pdf
+        }],
+		now=True
+	)
 
 
 

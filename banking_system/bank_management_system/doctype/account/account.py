@@ -44,8 +44,6 @@ class Account(Document):
 		self.validate_pan_number()
 
 
-	
-
 	def validate_pan_number(self):
 		pan_no = self.pan_number.strip().upper()
 		name = self.ben_name.strip().upper()
